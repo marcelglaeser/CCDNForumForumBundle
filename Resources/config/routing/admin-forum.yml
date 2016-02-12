@@ -5,7 +5,7 @@ ccdn_forum_admin_forum_list:
 
 ccdn_forum_admin_forum_create:
     pattern: /create
-    defaults: { _controller: CCDNForumForumBundle:AdminForum:create, _locale: e}
+    defaults: { _controller: CCDNForumForumBundle:AdminForum:create, _locale: de}
 
 ccdn_forum_admin_forum_create_process:
     pattern: /create/process
@@ -21,7 +21,7 @@ ccdn_forum_admin_forum_edit_process:
 
 ccdn_forum_admin_forum_delete:
     pattern: /delete/{forumId}
-    defaults: { _controller: CCDNForumForumBundle:AdminForum:delete, _locale: e}
+    defaults: { _controller: CCDNForumForumBundle:AdminForum:delete, _locale: de}
 
 ccdn_forum_admin_forum_delete_process:
     pattern: /delete/{forumId}/process
