@@ -26,7 +26,7 @@ use CCDNForum\ForumBundle\Model\FrontModel\ModelInterface;
  * @link     https://github.com/codeconsortium/CCDNForumForumBundle
  *
  */
-class BoardListExtension extends \Twig_Extension
+class BoardListExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
 {
     /**
      *
@@ -53,7 +53,7 @@ class BoardListExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'board_list' => new \Twig_Function_Method($this, 'boardList'),
+            'board_list' => new \Twig_SimpleFunction($this, 'boardList'),
         );
     }
 
