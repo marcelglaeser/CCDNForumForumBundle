@@ -53,7 +53,7 @@ class BoardListExtension extends \Twig_Extension implements \Twig_Extension_Glob
     public function getFunctions()
     {
         return array(
-            'board_list' => new \Twig_SimpleFunction($this, 'boardList'),
+            'board_list' => new \Twig_SimpleFunction('board_list', array($this, 'board_list')),
         );
     }
 
