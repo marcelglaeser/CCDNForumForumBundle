@@ -14,7 +14,8 @@
 namespace CCDNForum\ForumBundle\Component\Security;
 
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+    
 use CCDNForum\ForumBundle\Component\Helper\PostLockHelper;
 use CCDNForum\ForumBundle\Entity\Forum;
 use CCDNForum\ForumBundle\Entity\Category;
@@ -54,10 +55,10 @@ class Authorizer
      *
      * @access public
      * @param \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $securityAuthorizationChecker
-     * @param \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $securityTokenStorage
+     * @param \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage $securityTokenStorage
      * @param \CCDNForum\ForumBundle\Component\Helper\PostLockHelper    $postLockHelper
      */
-    public function __construct(AuthorizationCheckerInterface $securityAuthorizationChecker, TokenStorageInterface $securityTokenStorage, PostLockHelper $postLockHelper)
+    public function __construct(AuthorizationCheckerInterface $securityAuthorizationChecker, TokenStorage $securityTokenStorage, PostLockHelper $postLockHelper)
     {
         $this->securityAuthorizationChecker = $securityAuthorizationChecker;
         $this->securityTokenStorage = $securityTokenStorage;
