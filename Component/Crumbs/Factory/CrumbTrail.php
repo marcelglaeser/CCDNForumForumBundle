@@ -14,7 +14,7 @@
 namespace CCDNForum\ForumBundle\Component\Crumbs\Factory;
 
 use Symfony\Component\Translation\TranslatorInterface;
-use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  *
@@ -53,7 +53,7 @@ class CrumbTrail
      * @param \Symfony\Component\Translation\TranslatorInterface $translator
      * @param \Symfony\Component\Routing\RouterInterface             $router
      */
-    public function __construct(TranslatorInterface $translator, RouterInterface $router)
+    public function __construct(TranslatorInterface $translator, UrlGeneratorInterface $router)
     {
         $this->translator = $translator;
         $this->router = $router;
@@ -82,7 +82,7 @@ class CrumbTrail
      */
     protected function path($route, $params = array())
     {
-        return $this->router->generate($route, $params);
+        return $this->router->generate($route, $params, UrlGeneratorInterface::ABSOLUTE_URL);
     }
 
     public function getTrail()
