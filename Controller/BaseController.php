@@ -61,9 +61,15 @@ class BaseController extends ContainerAware
 
     /**
      *
-     * @var \Symfony\Component\Security\Core\SecurityContext $securityContext
+     * @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage $securityTokenStorage
      */
-    private $securityContext;
+    private $securityTokenStorage;
+    
+    /**
+     *
+     * @var \Symfony\Component\Security\Core\Authorization\AuthorizationChecker $securityAuthorizationChecker
+     */
+    private $securityAuthorizationChecker;
 
     /**
      *
@@ -253,15 +259,29 @@ class BaseController extends ContainerAware
     /**
      *
      * @access protected
-     * @return \Symfony\Component\Security\Core\SecurityContext
+     * @return \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage
      */
-    protected function getSecurityContext()
+    protected function getTokenStorage()
     {
-        if (null == $this->securityContext) {
-            $this->securityContext = $this->container->get('security.context');
+        if (null == $this->securityTokenStorage) {
+            $this->securityTokenStorage = $this->container->get('security.token_storage');
         }
 
-        return $this->securityContext;
+        return $this->securityTokenStorage;
+    }
+    
+    /**
+     *
+     * @access protected
+     * @return \Symfony\Component\Security\Core\Authorization\AuthorizationChecker
+     */
+    protected function getAuthorizationChecker()
+    {
+        if (null == $this->securityAuthorizationChecker) {
+            $this->securityAuthorizationChecker = $this->container->get('security.authorization_checker');
+        }
+
+        return $this->securityAuthorizationChecker;
     }
 
     /**
@@ -271,7 +291,7 @@ class BaseController extends ContainerAware
      */
     protected function getUser()
     {
-        return $this->getSecurityContext()->getToken()->getUser();
+        return $this->getTokenStorage()->getToken()->getUser();
     }
 
     /**
@@ -282,7 +302,7 @@ class BaseController extends ContainerAware
      */
     protected function isGranted($role)
     {
-        if (! $this->getSecurityContext()->isGranted($role)) {
+        if (! $this->getAuthorizationChecker()->isGranted($role)) {
             return false;
         }
 
