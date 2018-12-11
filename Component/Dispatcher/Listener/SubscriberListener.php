@@ -13,7 +13,7 @@
 
 namespace CCDNForum\ForumBundle\Component\Dispatcher\Listener;
 
-use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -43,20 +43,20 @@ class SubscriberListener implements EventSubscriberInterface
     /**
      *
      * @access protected
-     * @var \Symfony\Component\Security\Core\SecurityContext $securityContext
+     * @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $securityTokenStorage
      */
-    protected $securityContext;
+    protected $securityTokenStorage;
 
     /**
      *
      * @access public
      * @param \CCDNForum\ForumBundle\Model\FrontModel\SubscriptionModel $subscriptionModel
-     * @param \Symfony\Component\Security\Core\SecurityContext          $securityContext
+     * @param \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface          $securityTokenStorage
      */
-    public function __construct($subscriptionModel, SecurityContext $securityContext)
+    public function __construct($subscriptionModel, TokenStorageInterface $securityTokenStorage)
     {
         $this->subscriptionModel = $subscriptionModel;
-        $this->securityContext = $securityContext;
+        $this->securityTokenStorage = $securityTokenStorage;
     }
 
     /**
@@ -80,7 +80,7 @@ class SubscriberListener implements EventSubscriberInterface
     {
         if ($event->getTopic()) {
             if ($event->getTopic()->getId() && $event->authorWantsToSubscribe()) {
-                $user = $this->securityContext->getToken()->getUser();
+                $user = $this->securityTokenStorage->getToken()->getUser();
 
                 $this->subscriptionModel->subscribe($event->getTopic(), $user);
             }
@@ -96,7 +96,7 @@ class SubscriberListener implements EventSubscriberInterface
     {
         if ($event->getTopic()) {
             if ($event->getTopic()->getId()) {
-                $user = $this->securityContext->getToken()->getUser();
+                $user = $this->securityTokenStorage->getToken()->getUser();
 
                 if ($event->authorWantsToSubscribe()) {
                     $this->subscriptionModel->subscribe($event->getTopic(), $user);
