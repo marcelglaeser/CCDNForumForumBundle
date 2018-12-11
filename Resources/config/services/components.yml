@@ -20,7 +20,7 @@ services:
     ccdn_forum_forum.component.helper.role:
         class: %ccdn_forum_forum.component.helper.role.class%
         arguments:
-            - @security.context
+            - @security.authorization_checker
             - %security.role_hierarchy.roles%
 
     #
@@ -29,7 +29,7 @@ services:
     ccdn_forum_forum.component.flood_control:
        class: %ccdn_forum_forum.component.flood_control.class%
        arguments:
-           - @security.context
+           - @security.authorization_checker
            - @session
            - %kernel.environment%
            - %ccdn_forum_forum.topic.user.flood_control.post_limit%
@@ -56,7 +56,7 @@ services:
         class: %ccdn_forum_forum.component.event_listener.subscriber.class%
         arguments:
             - @ccdn_forum_forum.model.subscription
-            - @security.context
+            - @security.token_storage
         tags:
             - { name: kernel.event_subscriber }
 
@@ -87,5 +87,6 @@ services:
     ccdn_forum_forum.component.security.authorizer:
         class: %ccdn_forum_forum.component.security.authorizer.class%
         arguments:
-            - @security.context
+            - @security.authorization_checker
+            - @security.token_storage
             - @ccdn_forum_forum.component.helper.post_lock
