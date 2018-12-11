@@ -14,7 +14,7 @@
 namespace CCDNForum\ForumBundle\Component\Helper;
 
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  *
@@ -32,9 +32,9 @@ class RoleHelper
     /**
      *
      * @access protected
-     * @var \Symfony\Component\Security\Core\SecurityContextInterface $securityContext
+     * @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $securityAuthorizationChecker
      */
-    protected $securityContext;
+    protected $securityAuthorizationChecker;
 
     /**
      *
@@ -53,12 +53,12 @@ class RoleHelper
     /**
      *
      * @access public
-     * @param \Symfony\Component\Security\Core\SecurityContextInterface $securityContext
+     * @param \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $securityAuthorizationChecker
      * @param array                                                     $availableRoles
      */
-    public function __construct(SecurityContextInterface $securityContext, $availableRoles)
+    public function __construct(AuthorizationCheckerInterface $securityAuthorizationChecker, $availableRoles)
     {
-        $this->securityContext = $securityContext;
+        $this->securityAuthorizationChecker = $securityAuthorizationChecker;
 
         // default role is array is empty.
         if (empty($availableRoles)) {
