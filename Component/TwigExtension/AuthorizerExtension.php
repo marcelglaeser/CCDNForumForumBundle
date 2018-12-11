@@ -31,7 +31,7 @@ use CCDNForum\ForumBundle\Entity\Subscription;
  * @link     https://github.com/codeconsortium/CCDNForumForumBundle
  *
  */
-class AuthorizerExtension extends \Twig_Extension
+class AuthorizerExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
 {
     /**
      *
@@ -58,28 +58,28 @@ class AuthorizerExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'canShowForum'            => new \Twig_Function_Method($this, 'canShowForum'),
-            'canShowCategory'         => new \Twig_Function_Method($this, 'canShowCategory'),
-            'canShowBoard'            => new \Twig_Function_Method($this, 'canShowBoard'),
-            'canCreateTopicOnBoard'   => new \Twig_Function_Method($this, 'canCreateTopicOnBoard'),
-            'canReplyToTopicOnBoard'  => new \Twig_Function_Method($this, 'canReplyToTopicOnBoard'),
-            'canShowTopic'            => new \Twig_Function_Method($this, 'canShowTopic'),
-            'canReplyToTopic'         => new \Twig_Function_Method($this, 'canReplyToTopic'),
-            'canDeleteTopic'          => new \Twig_Function_Method($this, 'canDeleteTopic'),
-            'canRestoreTopic'         => new \Twig_Function_Method($this, 'canRestoreTopic'),
-            'canCloseTopic'           => new \Twig_Function_Method($this, 'canCloseTopic'),
-            'canReopenTopic'          => new \Twig_Function_Method($this, 'canReopenTopic'),
-            'canTopicChangeBoard'     => new \Twig_Function_Method($this, 'canTopicChangeBoard'),
-            'canStickyTopic'          => new \Twig_Function_Method($this, 'canStickyTopic'),
-            'canUnstickyTopic'        => new \Twig_Function_Method($this, 'canUnstickyTopic'),
-            'canShowPost'             => new \Twig_Function_Method($this, 'canShowPost'),
-            'canEditPost'             => new \Twig_Function_Method($this, 'canEditPost'),
-            'canDeletePost'           => new \Twig_Function_Method($this, 'canDeletePost'),
-            'canRestorePost'          => new \Twig_Function_Method($this, 'canRestorePost'),
-            'canLockPost'             => new \Twig_Function_Method($this, 'canLockPost'),
-            'canUnlockPost'           => new \Twig_Function_Method($this, 'canUnlockPost'),
-            'canSubscribeToTopic'     => new \Twig_Function_Method($this, 'canSubscribeToTopic'),
-            'canUnsubscribeFromTopic' => new \Twig_Function_Method($this, 'canUnsubscribeFromTopic'),
+            'canShowForum'            => new \Twig_SimpleFunction ($this, 'canShowForum'),
+            'canShowCategory'         => new \Twig_SimpleFunction ($this, 'canShowCategory'),
+            'canShowBoard'            => new \Twig_SimpleFunction ($this, 'canShowBoard'),
+            'canCreateTopicOnBoard'   => new \Twig_SimpleFunction ($this, 'canCreateTopicOnBoard'),
+            'canReplyToTopicOnBoard'  => new \Twig_SimpleFunction ($this, 'canReplyToTopicOnBoard'),
+            'canShowTopic'            => new \Twig_SimpleFunction ($this, 'canShowTopic'),
+            'canReplyToTopic'         => new \Twig_SimpleFunction ($this, 'canReplyToTopic'),
+            'canDeleteTopic'          => new \Twig_SimpleFunction ($this, 'canDeleteTopic'),
+            'canRestoreTopic'         => new \Twig_SimpleFunction ($this, 'canRestoreTopic'),
+            'canCloseTopic'           => new \Twig_SimpleFunction ($this, 'canCloseTopic'),
+            'canReopenTopic'          => new \Twig_SimpleFunction ($this, 'canReopenTopic'),
+            'canTopicChangeBoard'     => new \Twig_SimpleFunction ($this, 'canTopicChangeBoard'),
+            'canStickyTopic'          => new \Twig_SimpleFunction ($this, 'canStickyTopic'),
+            'canUnstickyTopic'        => new \Twig_SimpleFunction ($this, 'canUnstickyTopic'),
+            'canShowPost'             => new \Twig_SimpleFunction ($this, 'canShowPost'),
+            'canEditPost'             => new \Twig_SimpleFunction ($this, 'canEditPost'),
+            'canDeletePost'           => new \Twig_SimpleFunction ($this, 'canDeletePost'),
+            'canRestorePost'          => new \Twig_SimpleFunction ($this, 'canRestorePost'),
+            'canLockPost'             => new \Twig_SimpleFunction ($this, 'canLockPost'),
+            'canUnlockPost'           => new \Twig_SimpleFunction ($this, 'canUnlockPost'),
+            'canSubscribeToTopic'     => new \Twig_SimpleFunction ($this, 'canSubscribeToTopic'),
+            'canUnsubscribeFromTopic' => new \Twig_SimpleFunction ($this, 'canUnsubscribeFromTopic'),
         );
     }
 
