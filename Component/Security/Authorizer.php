@@ -343,7 +343,7 @@ class Authorizer
             if (! $post->getCreatedBy()) {
                 return false;
             } else {
-                if ($post->getCreatedBy()->getId() != $this->securityAuthorizationChecker->getToken()->getUser()->getId()) {
+                if ($post->getCreatedBy()->getId() != $this->securityTokenStorage->getToken()->getUser()->getId()) {
                     return false;
                 }
             }
